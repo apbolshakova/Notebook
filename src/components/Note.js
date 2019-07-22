@@ -9,7 +9,7 @@ export default class Note extends React.Component {
           <div className="clearfix"></div>
         </div>
         <div className="notes-container_note_content">
-          <input type="text" className="form-control" value={this.props.data} />
+          <input type="text" className="form-control" value={this.props.data || ""} />
         </div>
         <div className="clearfix"></div>
       </div>
