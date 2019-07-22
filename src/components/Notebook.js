@@ -5,7 +5,7 @@ import Content from './Content.js';
 export default class Notebook extends React.Component {
   render() {
     return (
-      <div class="container">
+      <div className="container">
         <Header />
         <Content />
       </div>
