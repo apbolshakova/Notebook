@@ -3,9 +3,9 @@ import Note from './Note.js'
 
 export default class Content extends React.Component {
   render(props) {
-    dataArr = ["Eat", "Sleep", "Code", "Repeat"];
+    let dataArr = ["Eat", "Sleep", "Code", "Repeat"];
     if (dataArr === null) dataArr = [];
-    let noteArr = dataArr.map((noteData) => <Note data={noteData}/>);
+    let noteArr = dataArr.map((noteData, index) => <Note data={noteData} key={index} />);
     return (
       <div id="notesContainer" className='container notes-container'>
         {noteArr}
