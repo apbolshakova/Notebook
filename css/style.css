@@ -1,17 +1,10 @@
-header
-{
-    padding: 10px;
-}
+header {
+  padding: 10px; }
 
-.notes-container_note
-{
-  margin-top: 25px;
+.note-container {
+  margin-top: 10px;
   padding: 25px;
   border-radius: 15px;
-  border: 1px solid #cccccc;
-}
-
-.notes-container_note_content
-{
-  margin-top: 10px;
-}
+  border: 1px solid #cccccc; }
+  .note-container__note_content {
+    margin-top: 10px; }
