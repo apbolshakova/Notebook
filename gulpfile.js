@@ -1,13 +1,12 @@
-const gulp = require('gulp'),
-      sass = require('gulp-sass');
+const gulp = require('gulp');
+const sass = require('gulp-sass');
 
-gulp.task('styles', function() {
-    return gulp.src('sass/**/*.scss')
-        .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('css/'))
+gulp.task('compileCSS', function () {
+  return gulp.src('sass/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('css/'))
 });
 
-//Watch task
-gulp.task('default', gulp.parallel('styles',function() {
-    gulp.watch('sass/**/*.scss',gulp.parallel('styles'));
+gulp.task('watchStyleEditing', gulp.parallel('compileCSS', function () {
+  gulp.watch('sass/**/*.scss', gulp.parallel('compileCSS'));
 }));

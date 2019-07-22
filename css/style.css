@@ -1,11 +1,12 @@
-.header {
+.header, .note-container {
   padding: 15px;
-  border: 1px solid #cccccc; }
+  border: 1px solid #cccccc;
+  background-color: #EEEEEE; }
 
 .note-container {
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 5px;
-  border: 1px solid #cccccc; }
-  .note-container__note_content {
-    margin-top: 20px; }
+  margin-top: 30px;
+  border-radius: 5px; }
+  .note-container__note-input {
+    margin-top: 10px;
+    height: 160px;
+    resize: none; }
