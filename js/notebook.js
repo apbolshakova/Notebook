@@ -2,6 +2,7 @@ class Notebook {
   constructor() {
     localStorage.setItem("notesNum", 1); //TODO: delete testing values
     this.handleStoredNotes();
+    this.handleNoteCreatingBtn();
   }
   handleStoredNotes() {
     this.notesNum = localStorage.getItem("notesNum") || 0;
@@ -11,7 +12,9 @@ class Notebook {
     }
     for (let i = 0; i < this.notesNum; i++) {
       let noteText = localStorage.getItem("note" + i);
-      this.renderNote(i, noteText);
+      if (noteText !== null) {
+        this.renderNote(i, noteText);
+      }
     }
   }
   renderNote(i, noteText) {
@@ -27,6 +30,14 @@ class Notebook {
       localStorage.setItem(note.id, noteInput[0].value);
     };
     notesContainer.insertBefore(note, notesContainer.children[0]);
+  }
+  handleNoteCreatingBtn() {
+    let btn = document.getElementById("noteCreatingBtn");
+    btn.onclick = () => {
+      this.renderNote(this.notesNum, "New note! (click to edit)");
+      this.notesNum++;
+      localStorage.setItem("notesNum", this.notesNum);
+    }
   }
 }
 
