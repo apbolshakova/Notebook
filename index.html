@@ -11,22 +11,21 @@
 
 <body>
   <div class="root">
-    <header class="container header">
-      <button type="button" class="btn btn-primary float-left header__button">+</button>
-      <div class="clearfix"></div>
+    <header class="header clearfix">
+      <button type="button" class="btn btn-secondary float-left header__button">+</button>
     </header>
-    <div class="container notes-container">
-      <div class="notes-container_note">
-        <div class="notes-container_note_header">
-          <button type="button" class="btn btn-secondary notes-container_note_header__button float-right">Delete</button>
-          <div class="clearfix"></div>
+    <div class="container content-container">
+      <div class="note-container">
+        <div class="note-container__note-header clearfix">
+          <button type="button" class="btn btn-secondary btn-sm float-right note-container__button">Delete</button>
         </div>
-        <div class="notes-container_note_content">
-          <input type="text" class="form-control" />
+        <div class="note-container__note-content">
+          <textarea class="form-control note-container__note-input"></textarea>
         </div>
-        <div class="clearfix"></div>
       </div>
     </div>
-    <footer class="container footer"></footer>
+    <footer class="footer"></footer>
   </div>
-</body></html>
+</body>
+
+</html>
