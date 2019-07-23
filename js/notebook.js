@@ -1,8 +1,6 @@
 class Notebook {
   constructor() {
-    //TODO: delete testing values
-    localStorage.setItem("notesNum", 1);
-    localStorage.setItem("note0", "first one");
+    localStorage.setItem("notesNum", 1); //TODO: delete testing values
     this.handleStoredNotes();
   }
   handleStoredNotes() {
@@ -25,6 +23,9 @@ class Notebook {
     note.id = "note" + i;
     let noteInput = note.getElementsByClassName("note-container__note-input");
     noteInput[0].value = noteText;
+    noteInput[0].onchange = function() {
+      localStorage.setItem(note.id, noteInput[0].value);
+    };
     notesContainer.insertBefore(note, notesContainer.children[0]);
   }
 }
