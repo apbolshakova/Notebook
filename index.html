@@ -14,18 +14,19 @@
     <header class="header clearfix">
       <button type="button" class="btn btn-secondary float-left header__button">+</button>
     </header>
-    <div class="container content-container">
-      <div class="note-container">
-        <div class="note-container__note-header clearfix">
-          <button type="button" class="btn btn-secondary btn-sm float-right note-container__button">Delete</button>
-        </div>
-        <div class="note-container__note-content">
-          <textarea class="form-control note-container__note-input"></textarea>
-        </div>
-      </div>
+    <div id="notesContainer" class="container content-container">  
     </div>
     <footer class="footer"></footer>
+    <div id="noteTemplate" class="note-container invisible">
+      <div class="note-container__note-header clearfix">
+        <button type="button" class="btn btn-secondary btn-sm float-right note-container__button">Delete</button>
+      </div>
+      <div class="note-container__note-content">
+        <textarea class="form-control note-container__note-input">New note! (click to edit)</textarea>
+      </div>
+    </div>
   </div>
+  <script type="module" src="js/index.js"></script>
 </body>
 
 </html>
