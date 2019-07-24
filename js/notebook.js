@@ -1,33 +1,40 @@
+import Note from "./note.js"
+
 class Notebook {
   constructor() {
     localStorage.setItem("notesNum", 1); //TODO: delete testing values
-    this.handleStoredNotes();
+    this.notesNum = this.getStoredNotesNum();
+    this.notesArr = this.getStoredNotesAsArr();
+    this.loadNotebook();
+    window.onbeforeunload = this.saveNotebook;
   }
-  handleStoredNotes() {
-    this.notesNum = localStorage.getItem("notesNum") || 0;
-    if (this.notesNum < 0) {
+  getStoredNotesNum() {
+    let notesNum = localStorage.getItem("notesNum") || 0;
+    if (notesNum < 0) {
       localStorage.setItem("notesNum", 0);
-      this.notesNum = 0;
+      notesNum = 0;
     }
+    return notesNum;
+  }
+  getStoredNotesAsArr() {
+    const notesArr = [];
     for (let i = 0; i < this.notesNum; i++) {
-      let noteText = localStorage.getItem("note" + i);
-      this.renderNote(i, noteText);
+      notesArr[i] = new Note(i);
+    }
+    return notesArr;
+  }
+  loadNotebook() {
+    this.renderAllNotesFromArr();
+  }
+  renderAllNotesFromArr() {
+    for (let i = 0; i < this.notesNum; i++) {
+      this.notesArr[i].renderAtBeginning();
     }
   }
-  renderNote(i, noteText) {
-    let notesContainer = document.getElementById("notesContainer");
-    let noteTemplate = document.getElementById("noteTemplate");
-    
-    let note = noteTemplate.cloneNode(true);
-    note.classList.remove("invisible");
-    note.id = "note" + i;
-    let noteInput = note.getElementsByClassName("note-container__note-input");
-    noteInput[0].value = noteText;
-    noteInput[0].onchange = function() {
-      localStorage.setItem(note.id, noteInput[0].value);
-    };
-    notesContainer.insertBefore(note, notesContainer.children[0]);
+  saveNotebook() {
+    for (let i = 0; i < this.notesNum; i++) {
+      this.notesArr[i].saveInLocalStorage();
+    }
   }
 }
-
 export default Notebook;
