@@ -6,7 +6,7 @@ class Notebook {
     this.notesNum = this.getStoredNotesNum();
     this.notesArr = this.getStoredNotesAsArr();
     this.loadNotebook();
-    window.onbeforeunload = this.saveNotebook;
+    this.initNotebookSavingEvent();
   }
   getStoredNotesNum() {
     let notesNum = localStorage.getItem("notesNum") || 0;
@@ -30,6 +30,10 @@ class Notebook {
     for (let i = 0; i < this.notesNum; i++) {
       this.notesArr[i].renderAtBeginning();
     }
+  }
+  initNotebookSavingEvent() {
+    this.saveNotebook.bind(this);
+    document.addEventListener("onbeforeunload", this.saveNotebook); //TODO: repair (not working)
   }
   saveNotebook() {
     for (let i = 0; i < this.notesNum; i++) {
