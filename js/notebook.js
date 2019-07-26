@@ -2,11 +2,14 @@ import Note from "./note.js"
 
 class Notebook {
   constructor() {
-    localStorage.setItem("notesNum", 1); //TODO: delete testing values
+    this.loadNotebook();
+  }
+  loadNotebook() {
     this.notesNum = this.getStoredNotesNum();
     this.notesArr = this.getStoredNotesAsArr();
-    this.loadNotebook();
+    this.renderAllNotesFromArr();
     this.initNotebookSavingEvent();
+    this.initCreatingBtnHandler();
   }
   getStoredNotesNum() {
     let notesNum = localStorage.getItem("notesNum") || 0;
@@ -23,9 +26,6 @@ class Notebook {
     }
     return notesArr;
   }
-  loadNotebook() {
-    this.renderAllNotesFromArr();
-  }
   renderAllNotesFromArr() {
     for (let i = 0; i < this.notesNum; i++) {
       this.notesArr[i].renderAtBeginning();
@@ -36,8 +36,19 @@ class Notebook {
     document.addEventListener("onbeforeunload", this.saveNotebook); //TODO: repair (not working)
   }
   saveNotebook() {
+    localStorage.setItem("notesNum", this.notesNum);
     for (let i = 0; i < this.notesNum; i++) {
       this.notesArr[i].saveInLocalStorage();
+    }
+  }
+  initCreatingBtnHandler() {
+    const btn = document.getElementById("noteCreatingBtn");
+    btn.onclick = () => {
+      this.notesArr[this.notesNum] = new Note(this.notesNum);
+      this.notesArr[this.notesNum].renderAtBeginning();
+      this.notesNum++;
+      this.saveNotebook.bind(this); //TODO: delete when
+      this.saveNotebook();          //saving event is repaired
     }
   }
 }
