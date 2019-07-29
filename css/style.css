@@ -8,5 +8,10 @@
   border-radius: 5px; }
   .note-container__note-input {
     margin-top: 10px;
-    height: 160px;
-    resize: none; }
+    height: 170px;
+    resize: none;
+    border: 0;
+    background-color: #EEEEEE;
+    outline: none !important;
+    -webkit-appearance: none;
+    box-shadow: none !important; }
