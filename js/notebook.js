@@ -1,7 +1,15 @@
-import Note from "./note.js"
+import Note from "./note.js";
 
 class Notebook {
   constructor() {
+    this.loadNotebook = this.loadNotebook.bind(this);
+    this.getStoredNotesNum = this.getStoredNotesNum.bind(this);
+    this.getStoredNotesAsArr = this.getStoredNotesAsArr.bind(this);
+    this.renderAllNotesFromArr = this.renderAllNotesFromArr.bind(this);
+    this.initNotebookSavingEvent = this.initNotebookSavingEvent.bind(this);
+    this.saveNotebook = this.saveNotebook.bind(this);
+    this.initCreatingBtnHandler = this.initCreatingBtnHandler.bind(this);
+    
     this.loadNotebook();
   }
   loadNotebook() {
@@ -12,8 +20,8 @@ class Notebook {
     this.initCreatingBtnHandler();
   }
   getStoredNotesNum() {
-    let notesNum = localStorage.getItem("notesNum") || 0;
-    if (notesNum < 0) {
+    let notesNum = +localStorage.getItem("notesNum") || 0;
+    if (notesNum <= 0) {
       localStorage.setItem("notesNum", 0);
       notesNum = 0;
     }
@@ -23,6 +31,7 @@ class Notebook {
     const notesArr = [];
     for (let i = 0; i < this.notesNum; i++) {
       notesArr[i] = new Note(i);
+      notesArr[i].inputNode.onchange = this.saveNotebook; //TODO: delete when saving event is repaired
     }
     return notesArr;
   }
@@ -32,7 +41,6 @@ class Notebook {
     }
   }
   initNotebookSavingEvent() {
-    this.saveNotebook.bind(this);
     document.addEventListener("onbeforeunload", this.saveNotebook); //TODO: repair (not working)
   }
   saveNotebook() {
@@ -45,10 +53,10 @@ class Notebook {
     const btn = document.getElementById("noteCreatingBtn");
     btn.onclick = () => {
       this.notesArr[this.notesNum] = new Note(this.notesNum);
+      this.notesArr[this.notesNum].inputNode.onchange = this.saveNotebook; //TODO: delete when saving event is repaired
       this.notesArr[this.notesNum].renderAtBeginning();
-      this.notesNum++;
-      this.saveNotebook.bind(this); //TODO: delete when
-      this.saveNotebook();          //saving event is repaired
+      this.notesNum++; 
+      this.saveNotebook(); //TODO: delete when saving event is repaired
     }
   }
 }

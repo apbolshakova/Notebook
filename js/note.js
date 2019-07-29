@@ -1,5 +1,10 @@
 class Note {
   constructor(i) {
+    this.getAsNode = this.getAsNode.bind(this);
+    this.initValue = this.initValue.bind(this);
+    this.renderAtBeginning = this.renderAtBeginning.bind(this);
+    this.saveInLocalStorage = this.saveInLocalStorage.bind(this);
+    
     this.index = i;
     this.DOMParent = document.getElementById("notesContainer");
     this.asNode = this.getAsNode();
